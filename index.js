@@ -14,6 +14,7 @@ router.get("/", function (req, res, next) {
 app.use("/api/", router);
 
 //Create server to listen on port 5000
+//listen method listens for connections on the host and the port number
 var server = app.listen(5000, function () {
   console.log("Node server is running on http://localhost:5000..");
 });
