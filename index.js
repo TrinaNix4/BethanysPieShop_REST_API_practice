@@ -12,7 +12,8 @@ let pies = [
 ];
 //Create GET to return a list of all pies
 router.get("/", function (req, res, next) {
-  res.send(pies);
+  //use .status method to return appropriate status code
+  res.status(200).send(pies);
 });
 
 //Configure router so all routes are prefixed with /api/v1
