@@ -9,3 +9,5 @@ let pieRepo = {
     ];
   },
 };
+
+module.exports = pieRepo;
