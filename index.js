@@ -6,19 +6,31 @@ let pieRepo = require("./repos/pieRepo");
 
 //use the express Router object
 let router = express.Router();
-//create an array of pie objects
-let pies = pieRepo.get();
+
+//let pies = pieRepo.get();
+
 //Create GET to return a list of all pies
 router.get("/", function (req, res, next) {
   //use .status method to return appropriate status code
   //use .json to pass a json object; want client to know
   //json data is being sent back
-  res.status(200).json({
-    status: 200,
-    statusText: "OK",
-    message: "All pies retrieved.",
-    data: pies,
-  });
+  pieRepo.get(
+    //in the 'get' we have 2 callbacks -resolve and reject
+    //so when calling the 'get', we need 2 functions
+    //the first function is the successful - if it gets the 'data' then go ahead and do the res.status(200) etc.
+    function (data) {
+      res.status(200).json({
+        status: 200,
+        statusText: "OK",
+        message: "All pies retrieved.",
+        data: data,
+      });
+    },
+    //the 2nd function is the error function and we will handle exception TODO
+    function (err) {
+      next(err);
+    }
+  );
 });
 
 //Configure router so all routes are prefixed with /api/v1
