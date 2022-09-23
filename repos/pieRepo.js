@@ -5,7 +5,7 @@ const FILE_NAME = "./assets/pies.json";
 
 let pieRepo = {
   get: function (resolve, reject) {
-    //read file on that file_name, the functiosn brings in an error and the data itself
+    //read file on that file_name, the function brings in an error and the data itself
     fs.readFile(FILE_NAME, function (err, data) {
       //if in error, going to call the reject callback, passing the error object back
       if (err) {
