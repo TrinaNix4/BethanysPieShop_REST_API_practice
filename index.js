@@ -7,7 +7,7 @@ let pieRepo = require("./repos/pieRepo");
 //use the express Router object
 let router = express.Router();
 
-//configure middleware to support JSON data parsing in request object
+//configure middleware to support JSON data parsing in request object;support somebody passing in JSON data
 app.use(express.json());
 //let pies = pieRepo.get();
 
@@ -81,6 +81,25 @@ router.get("/:id", function (req, res, next) {
           },
         });
       }
+    },
+    function (err) {
+      next(err);
+    }
+  );
+});
+
+//pass in req.body, put into the body of our request the pie data obj
+router.post("/", function (req, res, next) {
+  pieRepo.insert(
+    req.body,
+    function (data) {
+      //201 means data was created
+      res.status(201).json({
+        status: 201,
+        statusText: "Created",
+        message: "New Pie Added.",
+        data: data,
+      });
     },
     function (err) {
       next(err);
