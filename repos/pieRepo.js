@@ -17,6 +17,20 @@ let pieRepo = {
       }
     });
   },
+  //pass in the id, pass in a resolve and reject callback
+  getById: function (id, resolve, reject) {
+    //grab the data from our file name and reject if an error occurs
+    fs.readFile(FILE_NAME, function (err, data) {
+      if (err) {
+        reject(err);
+      } else {
+        //pass in each pie, check if pies id is equal to the id passed in by function
+        let pie = JSON.parse(data).find((p) => p.id);
+        resolve(pie);
+        //so either a real pie data will come back or a null
+      }
+    });
+  },
 };
 
 module.exports = pieRepo;
