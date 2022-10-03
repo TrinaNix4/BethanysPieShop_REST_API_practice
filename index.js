@@ -7,6 +7,8 @@ let pieRepo = require("./repos/pieRepo");
 //use the express Router object
 let router = express.Router();
 
+//configure middleware to support JSON data parsing in request object
+app.use(express.json());
 //let pies = pieRepo.get();
 
 //Create GET to return a list of all pies
