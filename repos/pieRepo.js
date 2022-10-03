@@ -73,6 +73,8 @@ let pieRepo = {
         fs.writeFile(FILE_NAME, JSON.stringify(pies), function (err) {
           if (err) {
             reject(err);
+          } else {
+            resolve(newData);
           }
         });
       }
