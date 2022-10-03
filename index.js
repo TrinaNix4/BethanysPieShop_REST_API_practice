@@ -32,7 +32,35 @@ router.get("/", function (req, res, next) {
     }
   );
 });
-
+router.get("/:id", function (req, res, next) {
+  pieRepo.getById(
+    req.params.id,
+    function (data) {
+      if (data) {
+        res.status(200).json({
+          status: 200,
+          statusText: "OK",
+          message: "Single Pie retrieved.",
+          data: data,
+        });
+        //if pie can't be found, use respone obj to pass back a status of 404
+      } else {
+        res.status(404).json({
+          status: 404,
+          statusText: "Not Found",
+          message: "The pie `" + req.params.id + "` could not be found.",
+          error: {
+            code: "NOT_FOUND",
+            message: "The pie `" + req.params.id + "` could not be found.",
+          },
+        });
+      }
+    },
+    function (err) {
+      next(err);
+    }
+  );
+});
 //Configure router so all routes are prefixed with /api/v1
 app.use("/api/", router);
 
