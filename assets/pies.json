@@ -1,5 +1,5 @@
 [
-  {
+   {
     "id": 1,
     "name": "Apple",
     "wholePrice": 19.99,
@@ -26,4 +26,4 @@
     "sliceCalories": 89,
     "imageUrl": "images/cherry.jpg"
   }
-]
+] 
