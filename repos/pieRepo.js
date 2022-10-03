@@ -25,9 +25,21 @@ let pieRepo = {
         reject(err);
       } else {
         //pass in each pie, check if pies id is equal to the id passed in by function
-        let pie = JSON.parse(data).find((p) => p.id);
+        let pie = JSON.parse(data).find((p) => p.id == id);
         resolve(pie);
         //so either a real pie data will come back or a null
+      }
+    });
+  },
+  search: function (searchObject, resolve, reject) {
+    fs.readFile(FILE_NAME, function (err, data) {
+      if (err) {
+        reject(err);
+      } else {
+        let pies = JSON.parse(data);
+        //perform search
+        if (searchObject) {
+        }
       }
     });
   },
