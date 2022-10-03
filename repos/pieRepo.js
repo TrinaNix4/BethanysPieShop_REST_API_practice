@@ -41,15 +41,21 @@ let pieRepo = {
         //perform search
         //once we get the data, going to check and make sure we have a search object
         if (searchObject) {
-          //apply a filter to the pies - check to see if the searchObject.id has some value, if it does then 
+          //apply a filter to the pies - check to see if the searchObject.id has some value, if it does then
           //search on id by doing p.id = searchObject.id otherwise pass back a true
           pies = pies.filter(
-            p => (searchObject.id ? p.id == searchObject.id : true) && 
-            //then check to see if searchObject.name has some value, if it does => do a case-insenstive search checking to see  if index of p.name is within searchObject.name and if that comes back greater than or = to 0, we know we have a match 
-            //otherwise return back a true 
-            (searchObject.name ? p.name.toLowerCase().indexOf(searchObject.name.toLowerCase))
-          )
+            (p) =>
+              (searchObject.id ? p.id == searchObject.id : true) &&
+              //then check to see if searchObject.name has some value, if it does => do a case-insenstive search checking to see  if index of p.name is within searchObject.name and if that comes back greater than or = to 0, we know we have a match
+              //otherwise return back a true
+              (searchObject.name
+                ? p.name
+                    .toLowerCase()
+                    .indexOf(searchObject.name.toLowerCase()) >= 0
+                : true)
+          );
         }
+        resolve(pies);
       }
     });
   },

@@ -32,6 +32,30 @@ router.get("/", function (req, res, next) {
     }
   );
 });
+
+router.get("/search", function (req, res, next) {
+  //search obj has an id property which we get from req.query.id and a name;either could be null
+  //
+  let searchObject = {
+    id: req.query.id,
+    name: req.query.name,
+  };
+
+  pieRepo.search(
+    searchObject,
+    function (data) {
+      res.status(200).json({
+        status: 200,
+        statusText: "OK",
+        message: "All pies retrieved.",
+        data: data,
+      });
+    },
+    function (err) {
+      next(err);
+    }
+  );
+});
 router.get("/:id", function (req, res, next) {
   pieRepo.getById(
     req.params.id,
