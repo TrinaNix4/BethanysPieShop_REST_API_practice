@@ -59,6 +59,25 @@ let pieRepo = {
       }
     });
   },
+  //pass in the new data - pie object
+  //read the pie file then parse the data so we have pies array
+  insert: function (newData, resolve, reject) {
+    fs.readFile(FILE_NAME, function (err, data) {
+      if (err) {
+        reject(err);
+      } else {
+        let pies = JSON.parse(data);
+        //push new obj onto pies array
+        pies.push(newData);
+        //use file system to write to same filename our json.stringify version of pies array
+        fs.writeFile(FILE_NAME, JSON.stringify(pies), function (err) {
+          if (err) {
+            reject(err);
+          }
+        });
+      }
+    });
+  },
 };
 
 module.exports = pieRepo;
